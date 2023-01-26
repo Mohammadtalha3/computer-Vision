@@ -1,0 +1,32 @@
+from asyncore import write
+from turtle import width
+import numpy as np 
+import cv2 as cv
+
+cam= cv.VideoCapture(0)
+
+def hd_resolution():
+    cam.set(3,1920)
+    cam.set(4,720)
+
+hd_resolution()
+
+width_frame=(cam.get(3))
+height_frame=(cam.get(4))
+
+out= cv.VideoWriter("recourses/video_camresolution.avi", cv.VideoWriter_fourcc('M,','J','p','G'),(width_frame,height_frame))
+
+
+
+while(True):
+    ret,frame= cam.read()
+    out.write(frame)
+    if ret==True:
+        cv.imshow("cam", frame)
+        if cv.waitKey(1)& 0xFF==ord('q'):
+            break
+    else:
+        break
+cam.release()
+out.release()
+cv.destroyAllWindows()

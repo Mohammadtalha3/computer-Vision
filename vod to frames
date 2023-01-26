@@ -1,0 +1,15 @@
+import cv2 as cv 
+
+img= cv.VideoCapture("recourses/video.mp4")
+
+frameNr=0
+
+while(True):
+    success,frame= img.read()
+    if success:
+        cv.imwrite(f"recourses/frames/frame_{frameNr}.jpg",frame)
+    else:
+        break
+    frameNr= frameNr+1
+
+img.release()

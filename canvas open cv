@@ -1,0 +1,29 @@
+from cv2 import FILLED
+import numpy as np 
+import cv2 as cv
+
+img= np.zeros((600,600))
+img1= np.ones((600,600))
+
+
+colored_img= np.zeros((600,600,3), np.uint8) #Adding color channel
+
+colored_img[:]= 255,0,256
+colored_img[50:300, 60:500]= 345,345,345
+#Adding line and comaparinif two lines
+cv.line(colored_img,(100,100),(400,400), (252,192,0),6)
+cv.line(colored_img,(0,0), (colored_img.shape[0],colored_img.shape[1]), (255,236,222),3)
+
+#Adding rectangle
+cv.rectangle(colored_img,(200,350),(400,500),(214,145,0) ,cv.FILLED)
+#Adding circle
+cv.circle(colored_img,(200,400),60, (250,156,0), 1)
+#Addinfg text
+cv.putText(colored_img,'Opencv',(200,300),cv.FONT_HERSHEY_COMPLEX_SMALL,1,(192,213,0),2)
+
+
+cv.imshow("colored_img", colored_img)
+cv.waitKey(0)
+
+img.release()
+cv.destroyAllWindows()

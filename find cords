@@ -1,0 +1,29 @@
+import numpy as np
+import cv2 as cv
+
+
+def find_coords(event, x,y, flags, params):
+    if event==cv.EVENT_LBUTTONDOWN:
+        print(x, ',',y)
+        font= cv.FONT_HERSHEY_PLAIN
+        cv.putText(img,str(x)+','+str(y),(x,y),font,1,(234,232,0), 2)
+        cv.imshow("image",img)
+    if event== cv.EVENT_RBUTTONDOWN:
+        print(x,'',y)
+        font=cv.FONT_HERSHEY_DUPLEX
+        b= img[y,x,0]
+        g= img[y,x,1]
+        r= img[y,x,2]
+        cv.putText(img,str(b)+','+str(g)+','+str(r), (x,y),font,1,(22,154,0),2)
+        cv.imshow("image",img)
+
+if __name__=="__main__":
+    img= cv.imread("recourses/book.jpg")
+    cv.imshow("image", img)
+    cv.setMouseCallback("image", find_coords)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+
+
+

@@ -1,0 +1,37 @@
+import cv2 as cv
+from cv2 import COLOR_BGR2GRAY 
+import numpy as np 
+img= cv.imread("recourses/image.jpg")
+#resizing image
+res= cv.resize(img, (400,600))
+#Gray image
+gray_frame= cv.cvtColor(res, cv.COLOR_BGR2GRAY)
+#blur image
+blur= cv.GaussianBlur(res, (7,7),0)
+#edge detection
+edge= cv.Canny(res, 53,53)
+# edge detection-> dilation
+mat_kernel= np.ones((3,3), np.uint8)
+dailat= cv.dilate(edge, (mat_kernel), iterations=1)
+# Erosion
+ero_img= cv.erode(dailat, mat_kernel)
+#black and white
+thresh,binary= cv.threshold(gray_frame,127,255, cv.THRESH_BINARY)
+
+
+
+
+
+
+
+#cv.imshow('image',res)
+#cv.imshow("gray image", gray_frame)
+#cv.imshow("blurred_image", blur)
+cv.imshow("edge", edge)
+cv.imshow("Dailated_image",dailat)
+cv.imshow("Erosion", ero_img)
+cv.imshow("b&w", binary)
+cv.waitKey(0)
+
+img.release()
+cv.destroyAllWindows()

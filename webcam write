@@ -1,0 +1,23 @@
+from ast import While
+from cv2 import cvtColor, waitKey
+import numpy as np 
+import cv2 as cv
+cap= cv.VideoCapture(0)
+frame_width=(int(cap.get(3)))
+frame_height=(int(cap.get(5)))
+out= cv.VideoWriter("recourses/cam_video.avi",cv.VideoWriter_fourcc('M','J','P','G'),10, (frame_width,frame_height))
+while(True):
+    ret,frame= cap.read()
+    #gray_frame= cv.CvtColor(frame,cv.COLOR_BGR2GRAY)
+    if ret==True:
+        out.write(frame)
+        cv.imshow('cam', frame)
+        if waitKey(1)& 0xFF==ord('q'):
+            break
+
+    else:
+        break
+
+cap.release()
+out.release()
+cv.destroyAllWindows()

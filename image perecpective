@@ -1,0 +1,23 @@
+import imghdr
+import cv2 as cv
+from cv2 import getPerspectiveTransform
+from cv2 import ROTATE_90_CLOCKWISE 
+import  numpy as np
+
+cap= cv.imread("recourses/book.jpg")
+print(cap.shape)
+point1=np.float32([[215,30],[133,372],[548,22],[637,360]])
+width= 593
+height=800
+point2= np.float32([[0,0],[593,0],[0,height],[width,height]])
+matrix=cv.getPerspectiveTransform(point1,point2)
+out_img= cv.warpPerspective(cap,matrix,(width, height))
+out_img= cv.flip(out_img,0)
+out_img= cv.rotate(out_img, cv.ROTATE_90_CLOCKWISE)
+cv.resize
+cv.imshow("image",out_img)
+
+cv.imshow("original",cap)
+cv.waitKey(0)
+cv.destroyAllWindows()
+
